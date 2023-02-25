@@ -210,6 +210,7 @@ Commands:
  stop         Stop the container
  clean        Remove container state (revert state to image built with 'setup')
  reset        Remove container state and restart (same as 'clean+start')
+ update-image Remove container state and update image to latest version
  clean-image  Remove all container state and the image (must 'setup' again)
  reset-all    Same as clean-image+setup+start
  clean-old    Discard containers generated with old versions of this script
@@ -288,6 +289,11 @@ main()
 	    ;;
 	setup|build-image)
 	    shift
+	    load_image $@
+	    ;;
+	update-image)
+	    shift
+	    remove_containers
 	    load_image $@
 	    ;;
 	remove-image|clean-image)
