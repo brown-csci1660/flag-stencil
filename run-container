@@ -6,7 +6,7 @@ set -eu
 maindir=""
 container_name=flag-webserver
 network_name=net-cs1660
-webserver_port=8889
+webserver_port=8888
 
 image_name=cs1660-flag-rel
 image_url="ghcr.io/brown-csci1660/${image_name}"
