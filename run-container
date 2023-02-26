@@ -205,7 +205,8 @@ Top-level options:
  --arm      Force building for ARM64 platform (ARM64/M1 macs only)
 
 Commands:
- setup        Download/update the container image (first time setup)
+ setup        Download the container image (first time setup)
+                - If container image exists, runs 'clean' and updates to latest
  start        Start the container (requires 'setup' first)
  stop         Stop the container
  clean        Remove container state (revert state to image built with 'setup')
@@ -288,6 +289,7 @@ main()
 	    ;;
 	setup|build-image)
 	    shift
+	    remove_containers || true
 	    load_image $@
 	    ;;
 	remove-image|clean-image)
