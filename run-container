@@ -6,7 +6,7 @@ set -eu
 maindir=""
 container_name=flag-webserver
 network_name=net-cs1660
-webserver_port=8889
+webserver_port=8888
 
 image_name=cs1660-flag-rel
 image_url="ghcr.io/brown-csci1660/${image_name}"
@@ -211,6 +211,7 @@ Commands:
  stop         Stop the container
  clean        Remove container state (revert state to image built with 'setup')
  reset        Remove container state and restart (same as 'clean+start')
+ update-image Remove container state and update image to latest version
  clean-image  Remove all container state and the image (must 'setup' again)
  reset-all    Same as clean-image+setup+start
  clean-old    Discard containers generated with old versions of this script
@@ -290,6 +291,11 @@ main()
 	setup|build-image)
 	    shift
 	    remove_containers || true
+	    load_image $@
+	    ;;
+	update-image)
+	    shift
+	    remove_containers
 	    load_image $@
 	    ;;
 	remove-image|clean-image)
