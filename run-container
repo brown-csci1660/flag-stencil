@@ -109,18 +109,7 @@ remove_network() {
 }
 
 start_new_container() {
-    netarg=
-    if test `uname` = Darwin; then
-	if ! netstat -n -a -p tcp | grep "\.${webserver_port}[  ].\*LISTEN" >/dev/null; then
-            netarg="$netarg --expose=80/tcp -p ${webserver_port}:80/tcp"
-	fi
-    elif test -x /bin/netstat; then
-	if ! netstat -n -a -p tcp | grep "\.${webserver_port}[  ].*LISTEN" >/dev/null; then
-            netarg="$netarg --expose=80/tcp -p ${webserver_port}:80/tcp"
-	fi
-    fi
-
-    create_network
+    netarg="--expose=80/tcp -p ${webserver_port}:80/tcp"
 
     vexec docker run -it \
           --name $container_name \
