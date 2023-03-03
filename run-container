@@ -111,6 +111,8 @@ remove_network() {
 start_new_container() {
     netarg="--expose=80/tcp -p ${webserver_port}:80/tcp"
 
+    create_network
+
     vexec docker run -it \
           --name $container_name \
 	  --network "${network_name}" --network-alias "[${container_name}]" \
