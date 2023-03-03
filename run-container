@@ -298,7 +298,7 @@ main()
 	    shift
 	    remove_containers || true
 	    remove_image || true
-	    build_image
+	    load_image
 	    do_start_or_run $@
 	    ;;
 	clean-old)
